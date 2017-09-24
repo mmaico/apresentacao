@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/salesman-crm.iml" filepath="$PROJECT_DIR$/.idea/modules/salesman-crm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/salesman-crm_main.iml" filepath="$PROJECT_DIR$/.idea/modules/salesman-crm_main.iml" group="salesman-crm" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/salesman-crm_test.iml" filepath="$PROJECT_DIR$/.idea/modules/salesman-crm_test.iml" group="salesman-crm" />
+    </modules>
+  </component>
+</project>
