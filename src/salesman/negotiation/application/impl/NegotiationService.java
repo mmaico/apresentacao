@@ -8,6 +8,7 @@ import salesman.negotiation.domain.model.negotiation.NegotiationDomainValue;
 import salesman.negotiation.domain.model.negotiation.NegotiationDomainValue.ChangeStatus;
 import salesman.negotiation.domain.model.negotiation.NegotiationDomainValue.ChangedNegotiation;
 import salesman.negotiation.domain.model.negotiation.NegotiationDomainValue.NewNegotiation;
+import salesman.negotiation.domain.model.negotiation.NegotiationValidator;
 import salesman.negotiation.domain.model.seller.Seller;
 
 import java.util.Collection;
@@ -17,10 +18,19 @@ import static salesman.negotiation.domain.model.seller.Seller.seller;
 
 public class NegotiationService implements NegotiationFacade {
 
+
+  private NegotiationValidator validator;
+
+  public NegotiationService(NegotiationValidator validator) {
+    this.validator = validator;
+  }
+
   public Negotiation register(NewNegotiation newNegotiation) {
     final Seller seller = newNegotiation.getSeller();
     final Negotiation negotiation = newNegotiation.getNegotiation();
     final Customer customer = newNegotiation.getCustomer();
+
+    validator.checkRules(newNegotiation);
 
     return seller.registerNew(negotiation).toThe(customer);
   }
