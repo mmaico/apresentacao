@@ -22,6 +22,11 @@ public class Seller {
         //this.itemRepository = ServiceLocator.getBean(ItemRepository.class);
     }
 
+    public Seller(Long id) {
+        this(); // <-- sempre chame o construtor defaul
+        this.id = id;
+    }
+
     public ToTheCustomer registerNew(Negotiation negotiation) {
         return customer ->
             negotiationRepository.register(negotiation.madeBy(this).toThe(customer));
@@ -51,6 +56,16 @@ public class Seller {
         return new Seller();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    //Se preferir pode criar um pacote dentro de domain chamado services e lá
+    // colocar as interfaces funcionais
     @FunctionalInterface
     public interface ToTheCustomer {
         Negotiation toThe(Customer customer);

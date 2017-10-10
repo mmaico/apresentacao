@@ -88,4 +88,22 @@ public class NegotiationDomainValue {
       return newStatus;
     }
   }
+
+  public static class ClosedWon {
+
+    private final Negotiation negotiation;
+
+
+    public ClosedWon(Negotiation negotiation) {
+      this.negotiation = negotiation;
+    }
+
+    public static ClosedWon closedWon(Negotiation negotiation) {
+      return new ClosedWon(negotiation);
+    }
+
+    public Negotiation getNegotiation() {
+      return negotiation;
+    }
+  }
 }

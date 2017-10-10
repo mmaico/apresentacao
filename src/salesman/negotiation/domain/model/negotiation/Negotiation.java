@@ -53,4 +53,8 @@ public class Negotiation {
     public String getDescription() {
         return description;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

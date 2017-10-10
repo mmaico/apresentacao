@@ -19,4 +19,7 @@ public class WhenIsActive {
     return this;
   }
 
+  public Seller getSeller() {
+    return seller;
+  }
 }

@@ -4,6 +4,7 @@ package salesman.negotiation.domain.model.negotiation;
 import salesman.negotiation.domain.model.negotiation.NegotiationDomainValue.OnlyOpenNegotiation;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface NegotiationRepository {
 
@@ -12,4 +13,6 @@ public interface NegotiationRepository {
   Negotiation update(Negotiation negotiation);
 
   Collection<Negotiation> findAll(OnlyOpenNegotiation onlyOpenNegotiation);
+
+  Optional<Negotiation> findOne(Long id);
 }

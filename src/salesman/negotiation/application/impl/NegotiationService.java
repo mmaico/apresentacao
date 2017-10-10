@@ -8,11 +8,13 @@ import salesman.negotiation.domain.model.negotiation.NegotiationDomainValue;
 import salesman.negotiation.domain.model.negotiation.NegotiationDomainValue.ChangeStatus;
 import salesman.negotiation.domain.model.negotiation.NegotiationDomainValue.ChangedNegotiation;
 import salesman.negotiation.domain.model.negotiation.NegotiationDomainValue.NewNegotiation;
+import salesman.negotiation.domain.model.negotiation.NegotiationEventHandler;
 import salesman.negotiation.domain.model.negotiation.NegotiationValidator;
 import salesman.negotiation.domain.model.seller.Seller;
 
 import java.util.Collection;
 
+import static salesman.negotiation.domain.model.negotiation.NegotiationDomainValue.ClosedWon.closedWon;
 import static salesman.negotiation.domain.model.negotiation.NegotiationDomainValue.OnlyOpenNegotiation.onlyOpenNegotiation;
 import static salesman.negotiation.domain.model.seller.Seller.seller;
 
@@ -20,9 +22,11 @@ public class NegotiationService implements NegotiationFacade {
 
 
   private NegotiationValidator validator;
+  private NegotiationEventHandler eventHandler;
 
-  public NegotiationService(NegotiationValidator validator) {
+  public NegotiationService(NegotiationValidator validator, NegotiationEventHandler eventHandler) {
     this.validator = validator;
+    this.eventHandler = eventHandler;
   }
 
   public Negotiation register(NewNegotiation newNegotiation) {
@@ -54,11 +58,7 @@ public class NegotiationService implements NegotiationFacade {
     Negotiation changedNegotiation = seller().changes(negotiation).toTheNew(status);
 
     if (changedNegotiation.wasClosedWon()) {
-      // gerar uma venda
-      // mandar notificacao para o cliente
-      // gerar comissionamento para o vendedor
-      // gerar bonus para a proxima compra do cliente
-      // ...
+      eventHandler.sendEvent(closedWon(changedNegotiation));
     }
 
     return changedNegotiation;
